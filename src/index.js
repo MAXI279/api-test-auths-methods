@@ -189,6 +189,6 @@ app.get('/header/ROOT1', headerAuth, (req, res, next) => {
   return res.json([]);
 });
 
-app.listen(3232, () => {
+app.listen(80, () => {
   console.log('Example app listening on port 3232!');
 });
