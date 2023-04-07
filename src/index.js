@@ -139,7 +139,7 @@ async function headerAuth(req, res, next) {
     next();
 }
 
-app.get('/header/test', headerAuth, (req, res, next) => {
+app.get('/header/test', (req, res, next) => {
     const PAGE_SIZE = 4;
 
     const cursor = req.query.cursor || '';
@@ -176,10 +176,10 @@ app.get('/header/test', headerAuth, (req, res, next) => {
         } else {
             // if this is not the first page, set the next page URL to '/header/test' with a cursor based on the next result
             nextPage = `/header/test?cursor=${allResults[
-                cursorIndex + 1
+                cursorIndex + PAGE_SIZE
             ].id.toString()}`;
-            nextCursor = allResults[cursorIndex + 1]
-                ? allResults[cursorIndex + 1].id.toString()
+            nextCursor = allResults[cursorIndex + PAGE_SIZE]
+                ? allResults[cursorIndex + PAGE_SIZE].id.toString()
                 : null;
         }
     }
@@ -231,6 +231,6 @@ const allResults = [
     { id: 13, name: 'test3', surname: 'test3' },
 ];
 
-app.listen(80, () => {
+app.listen(3080, () => {
     console.log('Example app listening on port 3232!');
 });
