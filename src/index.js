@@ -143,55 +143,77 @@ app.get('/header/test', headerAuth, (req, res, next) => {
     const PAGE_SIZE = 4;
 
     const cursor = req.query.cursor || '';
+    const page = parseInt(req.query.page || 1);
 
     // find the index of the cursor in the results
     const cursorIndex = allResults.findIndex(
         (item) => item.id.toString() === cursor
     );
 
-    // get the results for this page using the cursor
+    // get the results for this page using the cursor or page number
     let results;
-
-    if (cursorIndex === -1) {
-        // if the cursor is not found, return the first PAGE_SIZE results
-        results = allResults.slice(0, PAGE_SIZE);
-    } else {
+    if (cursorIndex === -1 && !isNaN(page)) {
+        // if the cursor is not found and page is specified, return the PAGE_SIZE results for that page
+        const startIndex = (page - 1) * PAGE_SIZE;
+        results = allResults.slice(startIndex, startIndex + PAGE_SIZE);
+    } else if (cursorIndex !== -1) {
         // if the cursor is found, return the next PAGE_SIZE results after the cursor
         results = allResults.slice(
             cursorIndex + 1,
             cursorIndex + 1 + PAGE_SIZE
         );
+    } else {
+        // if neither cursor nor page is specified, return the first PAGE_SIZE results
+        results = allResults.slice(0, PAGE_SIZE);
     }
 
     // calculate the next page URL and next cursor
     let nextPage = null;
     let nextCursor = null;
     if (results.length === PAGE_SIZE) {
-        if (cursorIndex === -1) {
-            // if it's the first page, set the next page URL to '/header/test' with a cursor based on the last result
-            nextPage = `/header/test?cursor=${results[
-                results.length - 1
-            ].id.toString()}`;
-            nextCursor = results[results.length - 1].id.toString();
+        if (cursorIndex === -1 && !isNaN(page)) {
+            // if it's the first page, set the next page URL to '/header/test' with a page number of 2
+            nextPage = `/header/test?page=${page + 1}`;
+            nextCursor = allResults[PAGE_SIZE - 1].id.toString();
         } else {
-            // if this is not the first page, set the next page URL to '/header/test' with a cursor based on the next result
-            nextPage = `/header/test?cursor=${allResults[
-                cursorIndex + PAGE_SIZE
-            ].id.toString()}`;
-            nextCursor = allResults[cursorIndex + PAGE_SIZE]
-                ? allResults[cursorIndex + PAGE_SIZE].id.toString()
-                : null;
+            // if this is not the first page, set the next page URL to '/header/test' with the same cursor or page number
+            if (cursorIndex !== -1) {
+                const nextIndex = cursorIndex + PAGE_SIZE;
+                nextPage =
+                    nextIndex < allResults.length
+                        ? `/header/test?cursor=${allResults[
+                              nextIndex
+                          ].id.toString()}`
+                        : null;
+                nextCursor =
+                    nextIndex < allResults.length
+                        ? allResults[nextIndex].id.toString()
+                        : null;
+            } else {
+                nextPage = `/header/test?page=${page + 1}`;
+                nextCursor = null;
+            }
         }
     }
 
     // build pagination strategies
     const pagination = {};
-    if (nextCursor !== null) {
-        pagination.next_cursor = nextCursor;
-        pagination.next_page = nextPage;
+    if (nextCursor !== null || !isNaN(page)) {
+        if (nextCursor !== null) {
+            pagination.next_cursor = nextCursor;
+        }
+        if (!isNaN(page)) {
+            pagination.next_page = nextPage;
+        }
     } else {
         pagination.next_cursor = null;
         pagination.next_page = null;
+    }
+
+    // add cursor=null to last page
+    if (pagination.next_page === null) {
+        pagination.next_page = null;
+        pagination.next_cursor = null;
     }
 
     return res.json({
