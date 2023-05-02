@@ -139,7 +139,7 @@ async function headerAuth(req, res, next) {
     next();
 }
 
-app.get('/header/test', (req, res, next) => {
+app.get('/header/test', headerAuth, (req, res, next) => {
     const PAGE_SIZE = 4;
 
     const cursor = req.query.cursor || '';
