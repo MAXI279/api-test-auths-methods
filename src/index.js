@@ -139,31 +139,32 @@ async function headerAuth(req, res, next) {
     next();
 }
 
-app.get('/header/test', headerAuth, (req, res, next) => {
+app.get('/header/test', (req, res, next) => {
     const PAGE_SIZE = 4;
 
     const cursor = req.query.cursor || '';
     const page = parseInt(req.query.page || 1);
+    const offset = parseInt(req.query.offset || 0);
+    const limit = parseInt(req.query.limit || PAGE_SIZE);
 
     // find the index of the cursor in the results
     const cursorIndex = allResults.findIndex(
         (item) => item.id.toString() === cursor
     );
 
-    // get the results for this page using the cursor or page number
+    // get the results for this page using the cursor or page number or offset and limit
     let results;
-    if (cursorIndex === -1 && !isNaN(page)) {
-        // if the cursor is not found and page is specified, return the PAGE_SIZE results for that page
+    if (offset !== 0 || limit !== PAGE_SIZE) {
+        results = allResults.slice(offset, offset + limit);
+    } else if (cursorIndex === -1 && !isNaN(page)) {
         const startIndex = (page - 1) * PAGE_SIZE;
         results = allResults.slice(startIndex, startIndex + PAGE_SIZE);
     } else if (cursorIndex !== -1) {
-        // if the cursor is found, return the next PAGE_SIZE results after the cursor
         results = allResults.slice(
             cursorIndex + 1,
             cursorIndex + 1 + PAGE_SIZE
         );
     } else {
-        // if neither cursor nor page is specified, return the first PAGE_SIZE results
         results = allResults.slice(0, PAGE_SIZE);
     }
 
@@ -171,12 +172,14 @@ app.get('/header/test', headerAuth, (req, res, next) => {
     let nextPage = null;
     let nextCursor = null;
     if (results.length === PAGE_SIZE) {
-        if (cursorIndex === -1 && !isNaN(page)) {
-            // if it's the first page, set the next page URL to '/header/test' with a page number of 2
+        if (offset !== 0 || limit !== PAGE_SIZE) {
+            const nextPageOffset = offset + limit;
+            nextPage = `/header/test?offset=${nextPageOffset}&limit=${limit}`;
+            nextCursor = null;
+        } else if (cursorIndex === -1 && !isNaN(page)) {
             nextPage = `/header/test?page=${page + 1}`;
             nextCursor = allResults[PAGE_SIZE - 1].id.toString();
         } else {
-            // if this is not the first page, set the next page URL to '/header/test' with the same cursor or page number
             if (cursorIndex !== -1) {
                 const nextIndex = cursorIndex + PAGE_SIZE;
                 nextPage =
