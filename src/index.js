@@ -2,39 +2,10 @@ const _ = require('lodash');
 const express = require('express');
 const axios = require('axios');
 
+const { basicAuth, headerAuth, forceRateLimit } = require('./middlewares');
 const app = express();
 
 app.use(express.json());
-
-async function basicAuth(req, res, next) {
-    // check for basic auth header
-    if (
-        !req.headers.authorization ||
-        req.headers.authorization.indexOf('Basic ') === -1
-    ) {
-        return res
-            .status(401)
-            .json({ message: 'Missing Authorization Header' });
-    }
-
-    // verify auth credentials
-    const base64Credentials = req.headers.authorization.split(' ')[1];
-    const credentials = Buffer.from(base64Credentials, 'base64').toString(
-        'ascii'
-    );
-    const [username, password] = credentials.split(':');
-
-    if (username !== 'test' || password !== '1234') {
-        return res
-            .status(401)
-            .json({ message: 'Invalid Authentication Credentials' });
-    }
-
-    // attach user to request object
-    req.user = username;
-
-    next();
-}
 
 app.get('/', (req, res, next) => {
     return res.json({
@@ -43,7 +14,7 @@ app.get('/', (req, res, next) => {
     });
 });
 
-app.get('/test', basicAuth, (req, res, next) => {
+app.get('/test', basicAuth, forceRateLimit, (req, res, next) => {
     return res.json({
         next_page: '/test1',
         results: [
@@ -55,7 +26,7 @@ app.get('/test', basicAuth, (req, res, next) => {
     });
 });
 
-app.get('/test1', basicAuth, (req, res, next) => {
+app.get('/test1', basicAuth, forceRateLimit, (req, res, next) => {
     return res.json({
         next_page: '/test2',
         results: [
@@ -67,7 +38,7 @@ app.get('/test1', basicAuth, (req, res, next) => {
     });
 });
 
-app.get('/test2', basicAuth, (req, res, next) => {
+app.get('/test2', basicAuth, forceRateLimit, (req, res, next) => {
     return res.json({
         next_page: '/test3',
         results: [
@@ -77,7 +48,7 @@ app.get('/test2', basicAuth, (req, res, next) => {
     });
 });
 
-app.get('/test3', basicAuth, (req, res, next) => {
+app.get('/test3', basicAuth, forceRateLimit, (req, res, next) => {
     res.setHeader('next_page', '/nextInHeader');
     return res.json({
         results: [
@@ -88,7 +59,7 @@ app.get('/test3', basicAuth, (req, res, next) => {
     });
 });
 
-app.get('/nextInHeader', basicAuth, (req, res, next) => {
+app.get('/nextInHeader', basicAuth, forceRateLimit, (req, res, next) => {
     return res.json({
         next_page: '',
         results: [
@@ -112,32 +83,6 @@ app.post('/postTest', basicAuth, (req, res, next) => {
         ],
     });
 });
-
-async function headerAuth(req, res, next) {
-    // check for basic auth header
-    if (
-        !req.headers.authorization ||
-        req.headers.authorization.indexOf('Bearer ') === -1
-    ) {
-        return res
-            .status(401)
-            .json({ message: 'Missing Authorization Header' });
-    }
-
-    // verify auth credentials
-    const token = req.headers.authorization.split(' ')[1];
-
-    if (token !== '1234') {
-        return res
-            .status(401)
-            .json({ message: 'Invalid Authentication Credentials' });
-    }
-
-    // attach user to request object
-    req.token = token;
-
-    next();
-}
 
 app.get('/header/test', headerAuth, (req, res, next) => {
     const PAGE_SIZE = 4;
