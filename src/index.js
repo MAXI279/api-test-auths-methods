@@ -5,6 +5,8 @@ const axios = require('axios');
 const { basicAuth, headerAuth, forceRateLimit } = require('./middlewares');
 const app = express();
 
+const PORT = 3080;
+
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
@@ -185,6 +187,30 @@ app.get('/header/ROOT1', headerAuth, (req, res, next) => {
     return res.json([]);
 });
 
+app.get('/test/:errorId', (req, res, next) => {
+    const { errorId } = req.params;
+    const errors = {
+        400: 'Bad Request',
+        401: 'Unauthorized',
+        403: 'Forbidden',
+        404: 'Not Found',
+        429: 'Too Many Requests',
+        500: 'Internal Server Error',
+        503: 'Service Unavailable',
+    };
+
+    if (!errors[errorId]) {
+        return res.status(400).json({
+            status: 400,
+            message: 'Bad Request',
+        });
+    }
+    return res.status(parseInt(errorId)).json({
+        status: errorId,
+        message: errors[errorId],
+    });
+});
+
 const allResults = [
     { id: 1, name: 'test', surname: 'test1' },
     { id: 2, name: 'test', surname: 'test2' },
@@ -201,6 +227,6 @@ const allResults = [
     { id: 13, name: 'test3', surname: 'test3' },
 ];
 
-app.listen(3080, () => {
-    console.log('Example app listening on port 3232!');
+app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}!`);
 });
