@@ -2,7 +2,12 @@ const _ = require('lodash');
 const express = require('express');
 const axios = require('axios');
 
-const { basicAuth, headerAuth, forceRateLimit } = require('./middlewares');
+const {
+    basicAuth,
+    headerAuth,
+    forceRateLimit,
+    headerAuth2,
+} = require('./middlewares');
 const app = express();
 
 const PORT = 3080;
@@ -87,6 +92,92 @@ app.post('/postTest', basicAuth, (req, res, next) => {
 });
 
 app.get('/header/test', headerAuth, (req, res, next) => {
+    const PAGE_SIZE = 4;
+
+    const cursor = req.query.cursor || '';
+    const page = parseInt(req.query.page || 1);
+    const offset = parseInt(req.query.offset || 0);
+    const limit = parseInt(req.query.limit || PAGE_SIZE);
+
+    // find the index of the cursor in the results
+    const cursorIndex = allResults.findIndex(
+        (item) => item.id.toString() === cursor
+    );
+
+    // get the results for this page using the cursor or page number or offset and limit
+    let results;
+    if (offset !== 0 || limit !== PAGE_SIZE) {
+        results = allResults.slice(offset, offset + limit);
+    } else if (cursorIndex === -1 && !isNaN(page)) {
+        const startIndex = (page - 1) * PAGE_SIZE;
+        results = allResults.slice(startIndex, startIndex + PAGE_SIZE);
+    } else if (cursorIndex !== -1) {
+        results = allResults.slice(
+            cursorIndex + 1,
+            cursorIndex + 1 + PAGE_SIZE
+        );
+    } else {
+        results = allResults.slice(0, PAGE_SIZE);
+    }
+
+    // calculate the next page URL and next cursor
+    let nextPage = null;
+    let nextCursor = null;
+    if (results.length === PAGE_SIZE) {
+        if (offset !== 0 || limit !== PAGE_SIZE) {
+            const nextPageOffset = offset + limit;
+            nextPage = `/header/test?offset=${nextPageOffset}&limit=${limit}`;
+            nextCursor = null;
+        } else if (cursorIndex === -1 && !isNaN(page)) {
+            nextPage = `/header/test?page=${page + 1}`;
+            nextCursor = allResults[PAGE_SIZE - 1].id.toString();
+        } else {
+            if (cursorIndex !== -1) {
+                const nextIndex = cursorIndex + PAGE_SIZE;
+                nextPage =
+                    nextIndex < allResults.length
+                        ? `/header/test?cursor=${allResults[
+                              nextIndex
+                          ].id.toString()}`
+                        : null;
+                nextCursor =
+                    nextIndex < allResults.length
+                        ? allResults[nextIndex].id.toString()
+                        : null;
+            } else {
+                nextPage = `/header/test?page=${page + 1}`;
+                nextCursor = null;
+            }
+        }
+    }
+
+    // build pagination strategies
+    const pagination = {};
+    if (nextCursor !== null || !isNaN(page)) {
+        if (nextCursor !== null) {
+            pagination.next_cursor = nextCursor;
+        }
+        if (!isNaN(page)) {
+            pagination.next_page = nextPage;
+        }
+    } else {
+        pagination.next_cursor = null;
+        pagination.next_page = null;
+    }
+
+    // add cursor=null to last page
+    if (pagination.next_page === null) {
+        pagination.next_page = null;
+        pagination.next_cursor = null;
+    }
+
+    return res.json({
+        pagination,
+        results,
+    });
+});
+
+app.get('/header2/test', headerAuth2, (req, res, next) => {
     const PAGE_SIZE = 4;
 
     const cursor = req.query.cursor || '';
