@@ -302,10 +302,39 @@ app.get('/test/:errorId', (req, res, next) => {
     });
 });
 
+app.post('/header/test', headerAuth, (req, res, next) => {
+    const { limit, offset, ...filters } = req.body;
+    const queryParams = req.query;
+    const allFilters = {
+        ...filters,
+        ...queryParams,
+    };
+
+    // Filter data based on filters received from body and query params
+    let filteredData = allResults.filter((item) => {
+        for (let key in allFilters) {
+            if (item[key] !== allFilters[key]) {
+                return false;
+            }
+        }
+        return true;
+    });
+
+    // Apply limit and offset if they're provided
+    if (offset) {
+        filteredData = filteredData.slice(offset);
+    }
+    if (limit) {
+        filteredData = filteredData.slice(0, limit);
+    }
+
+    return res.json(filteredData);
+});
+
 const allResults = [
     { id: 1, name: 'test', surname: 'test1' },
     { id: 2, name: 'test', surname: 'test2' },
-    { id: 3, name: 'test', surname: 'test3' },
+    { id: 3, name: 'test1', surname: 'test3' },
     { id: 4, name: 'test', surname: 'test4' },
     { id: 5, name: 'test1', surname: 'test1' },
     { id: 6, name: 'test1', surname: 'test2' },
@@ -315,7 +344,11 @@ const allResults = [
     { id: 10, name: 'test2', surname: 'test2' },
     { id: 11, name: 'test3', surname: 'test1' },
     { id: 12, name: 'test3', surname: 'test2' },
-    { id: 13, name: 'test3', surname: 'test3' },
+    { id: 13, name: 'test1', surname: 'test3' },
+    { id: 14, name: 'test1', surname: 'test3' },
+    { id: 15, name: 'test1', surname: 'test3' },
+    { id: 16, name: 'test1', surname: 'test3' },
+    { id: 17, name: 'test1', surname: 'test3' },
 ];
 
 app.listen(PORT, () => {
