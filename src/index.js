@@ -304,8 +304,9 @@ app.get('/test/:errorId', (req, res, next) => {
 });
 
 app.post('/header/test', headerAuth, (req, res, next) => {
+    const MAX_RESULTS = 5;
     const { limit, offset, startAt, maxResults, ...filters } = req.body;
-    const queryParams = req.query;
+    const { page, ...queryParams } = req.query;
     const allFilters = {
         ...filters,
         ...queryParams,
@@ -327,6 +328,12 @@ app.post('/header/test', headerAuth, (req, res, next) => {
     }
     if (limit || maxResults) {
         filteredData = filteredData.slice(0, limit || maxResults);
+    }
+
+    if (page && !limit && !maxResults && !offset && !startAt) {
+        const startIndex = (page - 1) * MAX_RESULTS;
+        filteredData = filteredData.slice(startIndex, startIndex + MAX_RESULTS);
+        return res.json(filteredData);
     }
 
     return res.json(filteredData);
