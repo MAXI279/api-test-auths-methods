@@ -322,18 +322,21 @@ app.post('/header/test', headerAuth, (req, res, next) => {
         return true;
     });
 
+    if (!page && !limit && !maxResults && !offset && !startAt) {
+        return res.json(filteredData.slice(0, MAX_RESULTS));
+    }
+    if (page && !limit && !maxResults && !offset && !startAt) {
+        const startIndex = (page - 1) * MAX_RESULTS;
+        filteredData = filteredData.slice(startIndex, startIndex + MAX_RESULTS);
+        return res.json(filteredData);
+    }
+
     // Apply limit and offset if they're provided
     if (offset || startAt) {
         filteredData = filteredData.slice(offset || startAt);
     }
     if (limit || maxResults) {
         filteredData = filteredData.slice(0, limit || maxResults);
-    }
-
-    if (page && !limit && !maxResults && !offset && !startAt) {
-        const startIndex = (page - 1) * MAX_RESULTS;
-        filteredData = filteredData.slice(startIndex, startIndex + MAX_RESULTS);
-        return res.json(filteredData);
     }
 
     return res.json(filteredData);
