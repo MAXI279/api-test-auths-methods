@@ -93,11 +93,12 @@ app.post('/postTest', basicAuth, (req, res, next) => {
 
 app.get('/header/test', headerAuth, (req, res, next) => {
     const PAGE_SIZE = 4;
-
+    const offsetKey = req.query.offset || req.query.startAt;
+    const limitKey = req.query.limit || req.query.maxResults;
     const cursor = req.query.cursor || '';
     const page = parseInt(req.query.page || 1);
-    const offset = parseInt(req.query.offset || 0);
-    const limit = parseInt(req.query.limit || PAGE_SIZE);
+    const offset = parseInt(offsetKey || 0);
+    const limit = parseInt(limitKey || PAGE_SIZE);
 
     // find the index of the cursor in the results
     const cursorIndex = allResults.findIndex(
@@ -347,8 +348,8 @@ const allResults = [
     { id: 13, name: 'test1', surname: 'test3' },
     { id: 14, name: 'test1', surname: 'test3' },
     { id: 15, name: 'test1', surname: 'test3' },
-    { id: 16, name: 'test1', surname: 'test3' },
-    { id: 17, name: 'test1', surname: 'test3' },
+    { id: 16, name: 'test2', surname: 'test3' },
+    { id: 17, name: 'test2', surname: 'test3' },
 ];
 
 app.listen(PORT, () => {
