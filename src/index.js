@@ -304,7 +304,7 @@ app.get('/test/:errorId', (req, res, next) => {
 });
 
 app.post('/header/test', headerAuth, (req, res, next) => {
-    const { limit, offset, ...filters } = req.body;
+    const { limit, offset, startAt, maxResults, ...filters } = req.body;
     const queryParams = req.query;
     const allFilters = {
         ...filters,
@@ -322,11 +322,11 @@ app.post('/header/test', headerAuth, (req, res, next) => {
     });
 
     // Apply limit and offset if they're provided
-    if (offset) {
-        filteredData = filteredData.slice(offset);
+    if (offset || startAt) {
+        filteredData = filteredData.slice(offset || startAt);
     }
-    if (limit) {
-        filteredData = filteredData.slice(0, limit);
+    if (limit || maxResults) {
+        filteredData = filteredData.slice(0, limit || maxResults);
     }
 
     return res.json(filteredData);
