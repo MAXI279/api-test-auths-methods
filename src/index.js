@@ -167,8 +167,10 @@ app.get('/header/test', headerAuth, (req, res, next) => {
     pagination.next_page = null;
     pagination.next_cursor = null;
   }
-
-  res.setHeader('link', `<${host}${pagination.next_page}>; rel="next"`);
+  const headerNext = host.includes('localhost')
+    ? `<http://${host}${pagination.next_page}>; rel="next"`
+    : `<https://${host}${pagination.next_page}>; rel="next"`;
+  res.setHeader('link', headerNext);
   return res.json({
     pagination,
     results,
