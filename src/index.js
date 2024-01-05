@@ -162,15 +162,17 @@ app.get('/header/test', headerAuth, (req, res, next) => {
     pagination.next_page = null;
   }
 
-  // add cursor=null to last page
-  if (pagination.next_page === null) {
-    pagination.next_page = null;
-    pagination.next_cursor = null;
-  }
   const headerNext = host.includes('localhost')
     ? `<http://${host}${pagination.next_page}>; rel="next"`
     : `<https://${host}${pagination.next_page}>; rel="next"`;
   res.setHeader('link', headerNext);
+
+  // add cursor=null to last page
+  if (pagination.next_page === null) {
+    pagination.next_page = null;
+    pagination.next_cursor = null;
+    res.removeHeader('link');
+  }
   return res.json({
     pagination,
     results,
