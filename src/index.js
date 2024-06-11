@@ -264,7 +264,7 @@ app.get('/header3/test', headerAuth, (req, res, next) => {
   const PAGE_SIZE = 4;
 
   const cursor = req.query.cursor || '';
-  const page = parseInt(req.query.page || 1);
+  const page = parseInt(req.query.page || req.body.page || 1);
   const offset = parseInt(req.query.offset || 0);
   const limit = parseInt(req.query.limit || PAGE_SIZE);
 
