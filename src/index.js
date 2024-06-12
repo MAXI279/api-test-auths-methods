@@ -80,8 +80,6 @@ app.get('/nextInHeader', basicAuth, forceRateLimit, (req, res, next) => {
 app.post('/postTest', basicAuth, (req, res, next) => {
   const { id } = req.body;
 
-  console.log(id);
-
   return res.json({
     id,
     results: [
@@ -338,81 +336,95 @@ app.get('/header3/test', headerAuth, (req, res, next) => {
 });
 
 app.get('/header/ROOT', headerAuth, (req, res, next) => {
-    res.setHeader('next_page', '/header/ROOT1');
-    return res.json([
-        { id: 1, name: 'test', surname: 'test1' },
-        { id: 2, name: 'test', surname: 'test2' },
-        { id: 3, name: 'test', surname: 'test3' },
-        { id: 4, name: 'test', surname: 'test4' },
-    ]);
+  res.setHeader('next_page', '/header/ROOT1');
+  return res.json([
+    { id: 1, name: 'test', surname: 'test1' },
+    { id: 2, name: 'test', surname: 'test2' },
+    { id: 3, name: 'test', surname: 'test3' },
+    { id: 4, name: 'test', surname: 'test4' },
+  ]);
 });
 
 app.get('/header/ROOT1', headerAuth, (req, res, next) => {
-    res.setHeader('next_page', '/header/ROOT2');
-    return res.json([]);
+  res.setHeader('next_page', '/header/ROOT2');
+  return res.json([]);
 });
 
 app.get('/test/:errorId', (req, res, next) => {
-    const { errorId } = req.params;
-    const errors = {
-        400: 'Bad Request',
-        401: 'Unauthorized',
-        403: 'Forbidden',
-        404: 'Not Found',
-        429: 'Too Many Requests',
-        500: 'Internal Server Error',
-        503: 'Service Unavailable',
-    };
+  const { errorId } = req.params;
+  const errors = {
+    400: 'Bad Request',
+    401: 'Unauthorized',
+    403: 'Forbidden',
+    404: 'Not Found',
+    429: 'Too Many Requests',
+    500: 'Internal Server Error',
+    503: 'Service Unavailable',
+  };
 
-    if (!errors[errorId]) {
-        return res.status(400).json({
-            status: 400,
-            message: 'Bad Request',
-        });
-    }
-    return res.status(parseInt(errorId)).json({
-        status: errorId,
-        message: errors[errorId],
+  if (!errors[errorId]) {
+    return res.status(400).json({
+      status: 400,
+      message: 'Bad Request',
     });
+  }
+  return res.status(parseInt(errorId)).json({
+    status: errorId,
+    message: errors[errorId],
+  });
 });
 
 app.post('/header/test', headerAuth, (req, res, next) => {
-    const MAX_RESULTS = 5;
-    const { limit, offset, startAt, maxResults, ...filters } = req.body;
-    const { page, ...queryParams } = req.query;
-    const allFilters = {
-        ...filters,
-        ...queryParams,
-    };
+  const MAX_RESULTS = 5;
+  const { limit, offset, startAt, maxResults, pageBody, ...filters } = req.body;
+  console.log(pageBody);
+  console.log(req.body);
+  const { page, ...queryParams } = req.query;
+  const allFilters = {
+    ...filters,
+    ...queryParams,
+  };
 
-    // Filter data based on filters received from body and query params
-    let filteredData = allResults.filter((item) => {
-        for (let key in allFilters) {
-            if (item[key] !== allFilters[key]) {
-                return false;
-            }
-        }
-        return true;
+  // Filter data based on filters received from body and query params
+  let filteredData = allResults.filter((item) => {
+    for (let key in allFilters) {
+      if (item[key] !== allFilters[key]) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  let pageData = filteredData;
+
+  if (page && !limit && !maxResults && !offset && !startAt) {
+    const startIndex = (page - 1) * MAX_RESULTS;
+    pageData = pageData.slice(startIndex, startIndex + MAX_RESULTS);
+    return res.json(pageData);
+  }
+
+  // Apply limit and offset if they're provided
+  if (offset || startAt) {
+    pageData = pageData.slice(offset || startAt);
+  }
+  if (limit || maxResults) {
+    pageData = pageData.slice(0, limit || maxResults);
+  }
+
+  if (pageBody) {
+    // modify starting index to start paging from page 2
+    const startIndex = (pageBody - 1) * MAX_RESULTS;
+    pageData = pageData.slice(startIndex, startIndex + MAX_RESULTS);
+    return res.json({
+      results: pageData,
+      total_count: filteredData.length,
     });
+  }
 
-    if (!page && !limit && !maxResults && !offset && !startAt) {
-        return res.json(filteredData.slice(0, MAX_RESULTS));
-    }
-    if (page && !limit && !maxResults && !offset && !startAt) {
-        const startIndex = (page - 1) * MAX_RESULTS;
-        filteredData = filteredData.slice(startIndex, startIndex + MAX_RESULTS);
-        return res.json(filteredData);
-    }
-
-    // Apply limit and offset if they're provided
-    if (offset || startAt) {
-        filteredData = filteredData.slice(offset || startAt);
-    }
-    if (limit || maxResults) {
-        filteredData = filteredData.slice(0, limit || maxResults);
-    }
-
-    return res.json(filteredData);
+  return res.json({
+    results: filteredData.slice(0, MAX_RESULTS),
+    total_count: filteredData.length,
+  });
 });
 
 const allResults = [
