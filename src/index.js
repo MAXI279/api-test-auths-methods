@@ -377,8 +377,7 @@ app.get('/test/:errorId', (req, res, next) => {
 app.post('/header/test', headerAuth, (req, res, next) => {
   const MAX_RESULTS = 5;
   const { limit, offset, startAt, maxResults, pageBody, ...filters } = req.body;
-  console.log(pageBody);
-  console.log(req.body);
+
   const { page, ...queryParams } = req.query;
   const allFilters = {
     ...filters,
@@ -400,7 +399,7 @@ app.post('/header/test', headerAuth, (req, res, next) => {
   if (page && !limit && !maxResults && !offset && !startAt) {
     const startIndex = (page - 1) * MAX_RESULTS;
     pageData = pageData.slice(startIndex, startIndex + MAX_RESULTS);
-    return res.json(pageData);
+    return res.json({ results: pageData });
   }
 
   // Apply limit and offset if they're provided
@@ -409,6 +408,7 @@ app.post('/header/test', headerAuth, (req, res, next) => {
   }
   if (limit || maxResults) {
     pageData = pageData.slice(0, limit || maxResults);
+    return res.json({ results: pageData });
   }
 
   if (pageBody) {
