@@ -1,12 +1,13 @@
 const _ = require('lodash');
 const express = require('express');
 const axios = require('axios');
+const fs = require('fs');
 
 const {
-    basicAuth,
-    headerAuth,
-    forceRateLimit,
-    headerAuth2,
+  basicAuth,
+  headerAuth,
+  forceRateLimit,
+  headerAuth2,
 } = require('./middlewares');
 const app = express();
 
@@ -15,66 +16,66 @@ const PORT = 3080;
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
-    return res.json({
-        status: 200,
-        message: 'test api online',
-    });
+  return res.json({
+    status: 200,
+    message: 'test api online',
+  });
 });
 
 app.get('/test', basicAuth, forceRateLimit, (req, res, next) => {
-    return res.json({
-        next_page: '/test1',
-        results: [
-            { id: 1, name: 'test', surname: 'test1' },
-            { id: 2, name: 'test', surname: 'test2' },
-            { id: 3, name: 'test', surname: 'test3' },
-            { id: 4, name: 'test', surname: 'test4' },
-        ],
-    });
+  return res.json({
+    next_page: '/test1',
+    results: [
+      { id: 1, name: 'test', surname: 'test1' },
+      { id: 2, name: 'test', surname: 'test2' },
+      { id: 3, name: 'test', surname: 'test3' },
+      { id: 4, name: 'test', surname: 'test4' },
+    ],
+  });
 });
 
 app.get('/test1', basicAuth, forceRateLimit, (req, res, next) => {
-    return res.json({
-        next_page: '/test2',
-        results: [
-            { id: 5, name: 'test1', surname: 'test1' },
-            { id: 6, name: 'test1', surname: 'test2' },
-            { id: 7, name: 'test1', surname: 'test3' },
-            { id: 8, name: 'test1', surname: 'test4' },
-        ],
-    });
+  return res.json({
+    next_page: '/test2',
+    results: [
+      { id: 5, name: 'test1', surname: 'test1' },
+      { id: 6, name: 'test1', surname: 'test2' },
+      { id: 7, name: 'test1', surname: 'test3' },
+      { id: 8, name: 'test1', surname: 'test4' },
+    ],
+  });
 });
 
 app.get('/test2', basicAuth, forceRateLimit, (req, res, next) => {
-    return res.json({
-        next_page: '/test3',
-        results: [
-            { id: 9, name: 'test2', surname: 'test1' },
-            { id: 10, name: 'test2', surname: 'test2' },
-        ],
-    });
+  return res.json({
+    next_page: '/test3',
+    results: [
+      { id: 9, name: 'test2', surname: 'test1' },
+      { id: 10, name: 'test2', surname: 'test2' },
+    ],
+  });
 });
 
 app.get('/test3', basicAuth, forceRateLimit, (req, res, next) => {
-    res.setHeader('next_page', '/nextInHeader');
-    return res.json({
-        results: [
-            { id: 11, name: 'test3', surname: 'test1' },
-            { id: 12, name: 'test3', surname: 'test2' },
-            { id: 13, name: 'test3', surname: 'test3' },
-        ],
-    });
+  res.setHeader('next_page', '/nextInHeader');
+  return res.json({
+    results: [
+      { id: 11, name: 'test3', surname: 'test1' },
+      { id: 12, name: 'test3', surname: 'test2' },
+      { id: 13, name: 'test3', surname: 'test3' },
+    ],
+  });
 });
 
 app.get('/nextInHeader', basicAuth, forceRateLimit, (req, res, next) => {
-    return res.json({
-        next_page: '',
-        results: [
-            { id: 11, name: 'test3', surname: 'test1' },
-            { id: 12, name: 'test3', surname: 'test2' },
-            { id: 13, name: 'test3', surname: 'test3' },
-        ],
-    });
+  return res.json({
+    next_page: '',
+    results: [
+      { id: 11, name: 'test3', surname: 'test1' },
+      { id: 12, name: 'test3', surname: 'test2' },
+      { id: 13, name: 'test3', surname: 'test3' },
+    ],
+  });
 });
 
 app.post('/postTest', basicAuth, (req, res, next) => {
@@ -424,6 +425,33 @@ app.post('/header/test', headerAuth, (req, res, next) => {
   return res.json({
     results: filteredData.slice(0, MAX_RESULTS),
     total_count: filteredData.length,
+  });
+});
+
+app.get('/header/csvresponse', headerAuth, (req, res, next) => {
+  fs.readFile('response.csv', 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).json({
+        status: 500,
+        message: 'Internal Server Error',
+      });
+    }
+    res.setHeader('Content-Type', 'text/csv');
+    // res.setHeader('Content-Disposition', 'attachment; filename=test.csv');
+    return res.send(data);
+  });
+});
+
+app.get('/header/xmlresponse', headerAuth, (req, res, next) => {
+  fs.readFile('response.xml', 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).json({
+        status: 500,
+        message: 'Internal Server Error',
+      });
+    }
+    res.setHeader('Content-Type', 'application/xml');
+    return res.send(data);
   });
 });
 
