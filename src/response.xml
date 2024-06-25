@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users type="array">			
+	 <user>						 
+			<id type="integer">771</id>						 
+			<created-at type="dateTime">2016-11-08T11:28:50+02:00</created-at>						 
+			<updated-at type="dateTime">2016-11-09T16:35:40+02:00</updated-at>						 
+			<login>testuser1</login>						 
+			<email>adf@gmail.com</email>						 
+			<purchasing-user type="boolean">true</purchasing-user>						 
+			<expense-user type="boolean">false</expense-user>						 
+			<sourcing-user type="boolean">false</sourcing-user>						 
+			<inventory-user type="boolean">false</inventory-user>						 
+			<employee-number />						 
+			<firstname>text</firstname>						 
+			<lastname>abc</lastname>						 
+			<fullname>text abc</fullname>						 
+			<api-user type="boolean">false</api-user>						 
+			<active type="boolean">true</active>						 
+			<salesforce-id nil="true" />						 
+			<account-security-type type="integer">0</account-security-type>						 
+			<authentication-method type="symbol">coupa_credentials</authentication-method>						 
+			<sso-identifier>899</sso-identifier>						 
+			<default-locale>en</default-locale>						 
+			<business-group-security-type type="integer">1</business-group-security-type>						 
+			<edit-invoice-on-quick-entry type="boolean">false</edit-invoice-on-quick-entry>						 
+			<avatar-thumb-url nil="true" />						 
+			<mention-name>text12</mention-name>						 
+			<custom-field-8 />						 
+			<custom-field-7 />						 
+			<gpo-entity />						 
+			<radio-button-test />						 
+			<subsidary />						 
+			<function />						 
+			<seg3default />						 
+			<username1 />						 
+			<roles type="array">										
+				 <role>													 
+						<id type="integer">2</id>													 
+						<created-at type="dateTime">2011-08-05T19:46:31+03:00</created-at>													 
+						<updated-at type="dateTime">2011-08-05T19:46:31+03:00</updated-at>													 
+						<name>Admin</name>													 
+						<description>Full system access to setup and maintain the application</description>													 
+						<omnipotent type="boolean">true</omnipotent>													 
+						<system-role type="boolean">true</system-role>													 
+						<updated-by>																	
+							 <id type="integer">1</id>																	
+							 <login>coupasupport</login>																	
+							 <email>upgrade+coupasupport@coupa.com</email>																	
+							 <employee-number />																	
+							 <firstname>Coupa</firstname>																	
+							 <lastname>Support</lastname>																	
+							 <salesforce-id nil="true" />																	
+							 <avatar-thumb-url nil="true" />																	
+							 <custom-field-8 />																	
+							 <custom-field-7 />																	
+							 <gpo-entity />																	
+							 <radio-button-test />																	
+							 <subsidary />																	
+							 <function />																	
+							 <seg3default />																	
+							 <username1 />															
+						</updated-by>											 
+				 </role>										
+				 <role>													 
+						<id type="integer">3</id>													 
+						<created-at type="dateTime">2011-08-05T19:46:31+03:00</created-at>													 
+						<updated-at type="dateTime">2011-08-05T19:46:31+03:00</updated-at>													 
+						<name>User</name>													 
+						<description>Standard role for all users who need to create and/or approve requisitions</description>													 
+						<omnipotent type="boolean">false</omnipotent>													 
+						<system-role type="boolean">true</system-role>													 
+						<updated-by>																	
+							 <id type="integer">1</id>																	
+							 <login>coupasupport</login>																	
+							 <email>upgrade+coupasupport@coupa.com</email>																	
+							 <employee-number />																	
+							 <firstname>Coupa</firstname>																	
+							 <lastname>Support</lastname>																	
+							 <salesforce-id nil="true" />																	
+							 <avatar-thumb-url nil="true" />																	
+							 <custom-field-8 />																	
+							 <custom-field-7 />																	
+							 <gpo-entity />																	
+							 <radio-button-test />																	
+							 <subsidary />																	
+							 <function />																	
+							 <seg3default />																	
+							 <username1 />															
+						</updated-by>											 
+				 </role>								
+			</roles>						 
+			<manager>										
+				 <id type="integer">629</id>										
+				 <login>gunab</login>										
+				 <email>catestit8@gmail.com</email>										
+				 <employee-number />										
+				 <firstname>gunab</firstname>										
+				 <lastname>buyer</lastname>										
+				 <salesforce-id nil="true" />										
+				 <avatar-thumb-url nil="true" />										
+				 <custom-field-8 />										
+				 <custom-field-7 />										
+				 <gpo-entity />										
+				 <radio-button-test />										
+				 <subsidary />										
+				 <function />										
+				 <seg3default />										
+				 <username1 />								
+			</manager>						 
+			<default-currency>										
+				 <id type="integer">1</id>										
+				 <code>USD</code>										
+				 <decimals type="integer">2</decimals>										
+				 <updated-by>													 
+						<id type="integer">80</id>													 
+						<login>learnapi</login>													 
+						<email>learnapi@learnapi.com</email>													 
+						<employee-number nil="true" />													 
+						<firstname>API</firstname>													 
+						<lastname>API</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</default-currency>						 
+			<requisition-approval-limit>										
+				 <id type="integer">35</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>requisition_header</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</requisition-approval-limit>						 
+			<expense-approval-limit>										
+				 <id type="integer">36</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED (2)</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>expense_report</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</expense-approval-limit>						 
+			<invoice-approval-limit>										
+				 <id type="integer">37</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED (3)</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>invoice_header</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</invoice-approval-limit>						 
+			<requisition-self-approval-limit>										
+				 <id type="integer">35</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>requisition_header</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</requisition-self-approval-limit>						 
+			<expense-self-approval-limit>										
+				 <id type="integer">36</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED (2)</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>expense_report</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</expense-self-approval-limit>						 
+			<expenses-delegated-to type="array" />						 
+			<can-expense-for type="array" />						 
+			<content-groups type="array" />						 
+			<account-groups type="array" />						 
+			<approval-groups type="array" />						 
+			<working-warehouses type="array" />						 
+			<inventory-organizations type="array" />						 
+			<created-by>										
+				 <id type="integer">224</id>										
+				 <login>sneha.latha@coupa.com</login>										
+				 <email>sneha.latha@coupa.com</email>										
+				 <employee-number nil="true" />										
+				 <firstname>Sneha</firstname>										
+				 <lastname>Latha</lastname>										
+				 <salesforce-id nil="true" />										
+				 <avatar-thumb-url nil="true" />										
+				 <custom-field-8 />										
+				 <custom-field-7 />										
+				 <gpo-entity />										
+				 <radio-button-test />										
+				 <subsidary />										
+				 <function />										
+				 <seg3default />										
+				 <username1 />								
+			</created-by>						 
+			<updated-by>										
+				 <id type="integer">228</id>										
+				 <login>kuppusamy.sekaran@coupa.com</login>										
+				 <email>kuppusamy.sekaran@coupa.com</email>										
+				 <employee-number nil="true" />										
+				 <firstname>Kuppusamy</firstname>										
+				 <lastname>Sekaran</lastname>										
+				 <salesforce-id nil="true" />										
+				 <avatar-thumb-url nil="true" />										
+				 <custom-field-8 />										
+				 <custom-field-7 />										
+				 <gpo-entity />										
+				 <radio-button-test />										
+				 <subsidary />										
+				 <function />										
+				 <seg3default />										
+				 <username1 />								
+			</updated-by>				 
+	 </user>			
+	 <user>						 
+			<id type="integer">808</id>						 
+			<created-at type="dateTime">2016-11-10T02:55:30+02:00</created-at>						 
+			<updated-at type="dateTime">2016-11-11T00:52:43+02:00</updated-at>						 
+			<login>pfiuser1</login>						 
+			<email>aditya+r17-pfiuser@coupa.com</email>						 
+			<purchasing-user type="boolean">true</purchasing-user>						 
+			<expense-user type="boolean">false</expense-user>						 
+			<sourcing-user type="boolean">false</sourcing-user>						 
+			<inventory-user type="boolean">false</inventory-user>						 
+			<employee-number />						 
+			<firstname>PFI</firstname>						 
+			<lastname>User</lastname>						 
+			<fullname>PFI User</fullname>						 
+			<api-user type="boolean">false</api-user>						 
+			<active type="boolean">true</active>						 
+			<salesforce-id nil="true" />						 
+			<account-security-type type="integer">0</account-security-type>						 
+			<authentication-method type="symbol">coupa_credentials</authentication-method>						 
+			<sso-identifier>pfiuser1</sso-identifier>						 
+			<default-locale>en</default-locale>						 
+			<business-group-security-type type="integer">0</business-group-security-type>						 
+			<edit-invoice-on-quick-entry type="boolean">false</edit-invoice-on-quick-entry>						 
+			<avatar-thumb-url nil="true" />						 
+			<mention-name>pfiuser</mention-name>						 
+			<custom-field-8 />						 
+			<custom-field-7 />						 
+			<gpo-entity />						 
+			<radio-button-test />						 
+			<subsidary />						 
+			<function />						 
+			<seg3default />						 
+			<username1 />						 
+			<roles type="array">										
+				 <role>													 
+						<id type="integer">3</id>													 
+						<created-at type="dateTime">2011-08-05T19:46:31+03:00</created-at>													 
+						<updated-at type="dateTime">2011-08-05T19:46:31+03:00</updated-at>													 
+						<name>User</name>													 
+						<description>Standard role for all users who need to create and / or approve requisitions</description>													 
+						<omnipotent type="boolean">false</omnipotent>													 
+						<system-role type="boolean">true</system-role>													 
+						<updated-by>																	
+							 <id type="integer">1</id>																	
+							 <login>coupasupport</login>																	
+							 <email>upgrade+coupasupport@coupa.com</email>																	
+							 <employee-number />																	
+							 <firstname>Coupa</firstname>																	
+							 <lastname>Support</lastname>																	
+							 <salesforce-id nil="true" />																	
+							 <avatar-thumb-url nil="true" />																	
+							 <custom-field-8 />																	
+							 <custom-field-7 />																	
+							 <gpo-entity />																	
+							 <radio-button-test />																	
+							 <subsidary />																	
+							 <function />																	
+							 <seg3default />																	
+							 <username1 />															
+						</updated-by>											 
+				 </role>										
+				 <role>													 
+						<id type="integer">10153</id>													 
+						<created-at type="dateTime">2016-11-11T00:52:22+02:00</created-at>													 
+						<updated-at type="dateTime">2016-11-11T00:52:22+02:00</updated-at>													 
+						<name>Analytics Only</name>													 
+						<description />													 
+						<omnipotent type="boolean">false</omnipotent>													 
+						<system-role type="boolean">false</system-role>													 
+						<created-by>																	
+							 <id type="integer">475</id>																	
+							 <login>justin.mehta@coupa.com</login>																	
+							 <email>justin.mehta@coupa.com</email>																	
+							 <employee-number nil="true" />																	
+							 <firstname>Justin</firstname>																	
+							 <lastname>Mehta</lastname>																	
+							 <salesforce-id nil="true" />																	
+							 <avatar-thumb-url nil="true" />																	
+							 <custom-field-8 />																	
+							 <custom-field-7 />																	
+							 <gpo-entity />																	
+							 <radio-button-test />																	
+							 <subsidary />																	
+							 <function />																	
+							 <seg3default />																	
+							 <username1 />															
+						</created-by>													 
+						<updated-by>																	
+							 <id type="integer">475</id>																	
+							 <login>justin.mehta@coupa.com</login>																	
+							 <email>justin.mehta@coupa.com</email>																	
+							 <employee-number nil="true" />																	
+							 <firstname>Justin</firstname>																	
+							 <lastname>Mehta</lastname>																	
+							 <salesforce-id nil="true" />																	
+							 <avatar-thumb-url nil="true" />																	
+							 <custom-field-8 />																	
+							 <custom-field-7 />																	
+							 <gpo-entity />																	
+							 <radio-button-test />																	
+							 <subsidary />																	
+							 <function />																	
+							 <seg3default />																	
+							 <username1 />															
+						</updated-by>											 
+				 </role>								
+			</roles>						 
+			<default-currency>										
+				 <id type="integer">156</id>										
+				 <code>AED</code>										
+				 <decimals type="integer">2</decimals>								
+			</default-currency>						 
+			<requisition-approval-limit>										
+				 <id type="integer">35</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>requisition_header</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</requisition-approval-limit>						 
+			<expense-approval-limit>										
+				 <id type="integer">36</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED (2)</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>expense_report</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</expense-approval-limit>						 
+			<invoice-approval-limit>										
+				 <id type="integer">37</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED (3)</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>invoice_header</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</invoice-approval-limit>						 
+			<requisition-self-approval-limit>										
+				 <id type="integer">35</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>requisition_header</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</requisition-self-approval-limit>						 
+			<expense-self-approval-limit>										
+				 <id type="integer">36</id>										
+				 <created-at type="dateTime">2016-04-01T09:08:38+03:00</created-at>										
+				 <updated-at type="dateTime">2016-04-01T09:08:38+03:00</updated-at>										
+				 <name>0.00 AED (2)</name>										
+				 <amount type="decimal">0.00</amount>										
+				 <subject>expense_report</subject>										
+				 <currency>													 
+						<id type="integer">156</id>													 
+						<code>AED</code>													 
+						<decimals type="integer">2</decimals>											 
+				 </currency>										
+				 <created-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </created-by>										
+				 <updated-by>													 
+						<id type="integer">1</id>													 
+						<login>coupasupport</login>													 
+						<email>upgrade+coupasupport@coupa.com</email>													 
+						<employee-number />													 
+						<firstname>Coupa</firstname>													 
+						<lastname>Support</lastname>													 
+						<salesforce-id nil="true" />													 
+						<avatar-thumb-url nil="true" />													 
+						<custom-field-8 />													 
+						<custom-field-7 />													 
+						<gpo-entity />													 
+						<radio-button-test />													 
+						<subsidary />													 
+						<function />													 
+						<seg3default />													 
+						<username1 />											 
+				 </updated-by>								
+			</expense-self-approval-limit>						 
+			<expenses-delegated-to type="array" />						 
+			<can-expense-for type="array" />						 
+			<content-groups type="array" />						 
+			<account-groups type="array" />						 
+			<approval-groups type="array" />						 
+			<working-warehouses type="array" />						 
+			<inventory-organizations type="array" />						 
+			<created-by>										
+				 <id type="integer">390</id>										
+				 <login>aditya.mandavilli@coupa.com</login>										
+				 <email>aditya.mandavilli@coupa.com</email>										
+				 <employee-number nil="true" />										
+				 <firstname>Aditya</firstname>										
+				 <lastname>Mandavilli</lastname>										
+				 <salesforce-id nil="true" />										
+				 <avatar-thumb-url nil="true" />										
+				 <custom-field-8 />										
+				 <custom-field-7 />										
+				 <gpo-entity />										
+				 <radio-button-test />										
+				 <subsidary />										
+				 <function />										
+				 <seg3default />										
+				 <username1 />								
+			</created-by>						 
+			<updated-by>										
+				 <id type="integer">475</id>										
+				 <login>justin.mehta@coupa.com</login>										
+				 <email>justin.mehta@coupa.com</email>										
+				 <employee-number nil="true" />										
+				 <firstname>Justin</firstname>										
+				 <lastname>Mehta</lastname>										
+				 <salesforce-id nil="true" />										
+				 <avatar-thumb-url nil="true" />										
+				 <custom-field-8 />										
+				 <custom-field-7 />										
+				 <gpo-entity />										
+				 <radio-button-test />										
+				 <subsidary />										
+				 <function />										
+				 <seg3default />										
+				 <username1 />								
+			</updated-by>				 
+   </user>
+</users>
