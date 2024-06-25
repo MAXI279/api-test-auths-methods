@@ -2,6 +2,7 @@ const _ = require('lodash');
 const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
+const path = require('path');
 
 const {
   basicAuth,
