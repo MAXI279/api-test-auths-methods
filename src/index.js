@@ -429,7 +429,8 @@ app.post('/header/test', headerAuth, (req, res, next) => {
 });
 
 app.get('/header/csvresponse', headerAuth, (req, res, next) => {
-  fs.readFile('response.csv', 'utf8', (err, data) => {
+  const filePath = path.join(__dirname, 'response.csv');
+  fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       return res.status(500).json({
         status: 500,
@@ -443,7 +444,8 @@ app.get('/header/csvresponse', headerAuth, (req, res, next) => {
 });
 
 app.get('/header/xmlresponse', headerAuth, (req, res, next) => {
-  fs.readFile('response.xml', 'utf8', (err, data) => {
+  const filePath = path.join(__dirname, 'response.xml');
+  fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       return res.status(500).json({
         status: 500,
