@@ -4,12 +4,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-const {
-  basicAuth,
-  headerAuth,
-  forceRateLimit,
-  headerAuth2,
-} = require('./middlewares');
+const { basicAuth, headerAuth, forceRateLimit, headerAuth2 } = require('./middlewares');
 const app = express();
 
 const PORT = 3080;
@@ -102,9 +97,7 @@ app.get('/header/test', headerAuth, (req, res, next) => {
   const limit = parseInt(limitKey || PAGE_SIZE);
   const host = req.get('host');
   // find the index of the cursor in the results
-  const cursorIndex = allResults.findIndex(
-    (item) => item.id.toString() === cursor
-  );
+  const cursorIndex = allResults.findIndex((item) => item.id.toString() === cursor);
 
   // get the results for this page using the cursor or page number or offset and limit
   let results;
@@ -137,10 +130,7 @@ app.get('/header/test', headerAuth, (req, res, next) => {
           nextIndex < allResults.length
             ? `/header/test?cursor=${allResults[nextIndex].id.toString()}`
             : null;
-        nextCursor =
-          nextIndex < allResults.length
-            ? allResults[nextIndex].id.toString()
-            : null;
+        nextCursor = nextIndex < allResults.length ? allResults[nextIndex].id.toString() : null;
       } else {
         nextPage = `/header/test?page=${page + 1}`;
         nextCursor = null;
@@ -179,6 +169,15 @@ app.get('/header/test', headerAuth, (req, res, next) => {
   });
 });
 
+app.get('/header/test/:id', headerAuth, (req, res, next) => {
+  const { id } = req.params;
+  const result = allResults.find((item) => item.id.toString() === id);
+  if (!result) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+  return res.json({ result });
+});
+
 app.get('/header2/test', headerAuth2, (req, res, next) => {
   const PAGE_SIZE = 4;
 
@@ -188,9 +187,7 @@ app.get('/header2/test', headerAuth2, (req, res, next) => {
   const limit = parseInt(req.query.limit || PAGE_SIZE);
 
   // find the index of the cursor in the results
-  const cursorIndex = allResults.findIndex(
-    (item) => item.id.toString() === cursor
-  );
+  const cursorIndex = allResults.findIndex((item) => item.id.toString() === cursor);
 
   // get the results for this page using the cursor or page number or offset and limit
   let results;
@@ -223,10 +220,7 @@ app.get('/header2/test', headerAuth2, (req, res, next) => {
           nextIndex < allResults.length
             ? `/header/test?cursor=${allResults[nextIndex].id.toString()}`
             : null;
-        nextCursor =
-          nextIndex < allResults.length
-            ? allResults[nextIndex].id.toString()
-            : null;
+        nextCursor = nextIndex < allResults.length ? allResults[nextIndex].id.toString() : null;
       } else {
         nextPage = `/header/test?page=${page + 1}`;
         nextCursor = null;
@@ -269,9 +263,7 @@ app.get('/header3/test', headerAuth, (req, res, next) => {
   const limit = parseInt(req.query.limit || PAGE_SIZE);
 
   // find the index of the cursor in the results
-  const cursorIndex = allResults.findIndex(
-    (item) => item.id.toString() === cursor
-  );
+  const cursorIndex = allResults.findIndex((item) => item.id.toString() === cursor);
 
   // get the results for this page using the cursor or page number or offset and limit
   let results;
@@ -304,10 +296,7 @@ app.get('/header3/test', headerAuth, (req, res, next) => {
         nextIndex < allResults.length
           ? `/header/test?cursor=${allResults[nextIndex].id.toString()}`
           : null;
-      nextCursor =
-        nextIndex < allResults.length
-          ? allResults[nextIndex].id.toString()
-          : null;
+      nextCursor = nextIndex < allResults.length ? allResults[nextIndex].id.toString() : null;
     } else {
       nextPage = `/header/test?page=${page + 1}`;
       nextCursor = null;
@@ -346,9 +335,7 @@ app.get('/header4/test', headerAuth, (req, res, next) => {
   const limit = parseInt(req.query.limit || PAGE_SIZE);
 
   // find the index of the cursor in the results
-  const cursorIndex = allResults.findIndex(
-    (item) => item.id.toString() === cursor
-  );
+  const cursorIndex = allResults.findIndex((item) => item.id.toString() === cursor);
 
   // get the results for this page using the cursor or page number or offset and limit
   let results;
@@ -381,10 +368,7 @@ app.get('/header4/test', headerAuth, (req, res, next) => {
         nextIndex < allResults.length
           ? `/header4/test?cursor=${allResults[nextIndex].id.toString()}`
           : null;
-      nextCursor =
-        nextIndex < allResults.length
-          ? allResults[nextIndex].id.toString()
-          : null;
+      nextCursor = nextIndex < allResults.length ? allResults[nextIndex].id.toString() : null;
     } else {
       nextPage = `/header4/test?page=${page + 1}`;
       nextCursor = null;
@@ -396,14 +380,14 @@ app.get('/header4/test', headerAuth, (req, res, next) => {
   const pagination = {};
   if (nextCursor !== null || !isNaN(page)) {
     if (nextCursor !== null) {
-      pagination['next.cursor'] = nextCursor;
+      pagination['@next.cursor'] = nextCursor;
     }
     if (!isNaN(page)) {
-      pagination['next.page'] = nextPage;
+      pagination['@next.page'] = nextPage;
     }
   } else {
-    pagination['next.cursor'] = null;
-    pagination['next.page'] = null;
+    pagination['@next.cursor'] = null;
+    pagination['@next.page'] = null;
   }
 
   // add cursor=null to last page
@@ -536,25 +520,25 @@ app.get('/header/xmlresponse', headerAuth, (req, res, next) => {
 });
 
 const allResults = [
-    { id: 1, name: 'test', surname: 'test1' },
-    { id: 2, name: 'test', surname: 'test2' },
-    { id: 3, name: 'test1', surname: 'test3' },
-    { id: 4, name: 'test', surname: 'test4' },
-    { id: 5, name: 'test1', surname: 'test1' },
-    { id: 6, name: 'test1', surname: 'test2' },
-    { id: 7, name: 'test1', surname: 'test3' },
-    { id: 8, name: 'test1', surname: 'test4' },
-    { id: 9, name: 'test2', surname: 'test1' },
-    { id: 10, name: 'test2', surname: 'test2' },
-    { id: 11, name: 'test3', surname: 'test1' },
-    { id: 12, name: 'test3', surname: 'test2' },
-    { id: 13, name: 'test1', surname: 'test3' },
-    { id: 14, name: 'test1', surname: 'test3' },
-    { id: 15, name: 'test1', surname: 'test3' },
-    { id: 16, name: 'test2', surname: 'test3' },
-    { id: 17, name: 'test2', surname: 'test3' },
+  { id: 1, name: 'test', surname: 'test1' },
+  { id: 2, name: 'test', surname: 'test2' },
+  { id: 3, name: 'test1', surname: 'test3' },
+  { id: 4, name: 'test', surname: 'test4' },
+  { id: 5, name: 'test1', surname: 'test1' },
+  { id: 6, name: 'test1', surname: 'test2' },
+  { id: 7, name: 'test1', surname: 'test3' },
+  { id: 8, name: 'test1', surname: 'test4' },
+  { id: 9, name: 'test2', surname: 'test1' },
+  { id: 10, name: 'test2', surname: 'test2' },
+  { id: 11, name: 'test3', surname: 'test1' },
+  { id: 12, name: 'test3', surname: 'test2' },
+  { id: 13, name: 'test1', surname: 'test3' },
+  { id: 14, name: 'test1', surname: 'test3' },
+  { id: 15, name: 'test1', surname: 'test3' },
+  { id: 16, name: 'test2', surname: 'test3' },
+  { id: 17, name: 'test2', surname: 'test3' },
 ];
 
 app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}!`);
+  console.log(`Example app listening on port ${PORT}!`);
 });
