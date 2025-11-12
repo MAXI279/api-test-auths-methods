@@ -87,6 +87,18 @@ app.post('/postTest', basicAuth, (req, res, next) => {
   });
 });
 
+app.get('/header/test/:id', headerAuth, (req, res, next) => {
+  const { id } = req.params;
+  const name = `test ${id}`;
+  const surname = `test surname ${id}`;
+
+  return res.json({
+    id,
+    surname,
+    name,
+  });
+});
+
 app.get('/header/test', headerAuth, (req, res, next) => {
   const PAGE_SIZE = 4;
   const offsetKey = req.query.offset || req.query.startAt;
@@ -167,15 +179,6 @@ app.get('/header/test', headerAuth, (req, res, next) => {
     pagination,
     results,
   });
-});
-
-app.get('/header/test/:id', headerAuth, (req, res, next) => {
-  const { id } = req.params;
-  const result = allResults.find((item) => item.id.toString() === id);
-  if (!result) {
-    return res.status(404).json({ error: 'Not found' });
-  }
-  return res.json({ result });
 });
 
 app.get('/header2/test', headerAuth2, (req, res, next) => {
